@@ -79,8 +79,8 @@ for file in $@
 			if [ -e "$trash_path/$file_name" ]
 			then
 				while [[ -e "$trash_path/$file_name" ]]; do
-					counter=counter+1
-					file_name=${file_name}_new
+					let "counter++"
+					file_name="${file}_$counter"
 				done
   				cat $file > $file_name
   				rm -r $file
