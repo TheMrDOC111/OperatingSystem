@@ -76,11 +76,13 @@ for file in $@
 		then
 			counter=0
 			file_name=$file
+			extension="${file_name##*.}"
+			name="${file_name%.*}"
 			if [ -e "$trash_path/$file_name" ]
 			then
 				while [[ -e "$trash_path/$file_name" ]]; do
 					let "counter++"
-					file_name="${file}_$counter"
+					file_name=${name}_${counter}.${extension}
 				done
   				cat $file > $file_name
   				rm -r $file
