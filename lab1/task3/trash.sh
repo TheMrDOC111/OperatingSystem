@@ -41,7 +41,12 @@ restore_from_trash(){
 	do
 		if [ -e "$trash_path/$file" ]
 		then
-			mv "$trash_path/$file" $PWD
+			if [ -e $file ]
+			then
+				echo "Error $file"
+			else
+				mv "$trash_path/$file" $PWD
+			fi
 		fi
 	done
 }
