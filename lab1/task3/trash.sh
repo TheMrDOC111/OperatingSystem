@@ -45,10 +45,8 @@ restore_from_trash(){
 			then
 				echo "Error $file"
 			else
-				mv "$trash_path/$file" $PWD
 				new_file=${file::-2}
-				cat $file > $new_file
-				rm -r $file
+				mv "$trash_path/$file" "$PWD/$new_file"
 			fi
 		fi
 	done
@@ -91,8 +89,6 @@ for file in $@
 				done
 			fi
 			file_name="$file.$counter"
-			cat $file > $file_name
-  			rm -r $file
-			mv $file_name "$trash_path/" 
+			mv $file "$trash_path/$file_name" 
 		fi
 	done
