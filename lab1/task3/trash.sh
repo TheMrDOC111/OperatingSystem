@@ -46,6 +46,9 @@ restore_from_trash(){
 				echo "Error $file"
 			else
 				mv "$trash_path/$file" $PWD
+				new_file=${file::-2}
+				cat $file > $new_file
+				rm -r $file
 			fi
 		fi
 	done
@@ -80,20 +83,16 @@ for file in $@
 		if [ -e $file ]
 		then
 			counter=0
-			file_name=$file
-			extension="${file_name##*.}"
-			name="${file_name%.*}"
 			if [ -e "$trash_path/$file_name" ]
 			then
 				while [[ -e "$trash_path/$file_name" ]]; do
 					let "counter++"
-					file_name=${name}_${counter}.${extension}
+					file_name="$file.$counter"
 				done
-  				cat $file > $file_name
-  				rm -r $file
-				mv $file_name "$trash_path/" 
-			else
-				mv $file "$trash_path/"
 			fi
+			file_name="$file.$counter"
+			cat $file > $file_name
+  			rm -r $file
+			mv $file_name "$trash_path/" 
 		fi
 	done
