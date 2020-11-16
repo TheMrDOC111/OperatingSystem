@@ -1,5 +1,3 @@
-#!/usr/bin/bash
-
 add_user(){
 	name=$1
 	pass=$2
@@ -17,5 +15,18 @@ m_des=$2
 groupadd staff
 useradd -g staff project_manager
 
-add_user "dev_user$n_dev" "dev$((1 + RANDOM % $n_dev))12345" developers dev_staff 
-add_user "des_user$m_des" "des$((1 + RANDOM % $m_des))12345" designers  des_staff 
+
+for (( i=1; i <= $n_dev; i++ ))
+do
+add_user "dev_user$i" "dev$((1 + RANDOM % $n_dev))12345" developers dev_staff 
+done
+
+
+
+
+for (( i=1; i <= $m_des; i++ ))
+do
+add_user "des_user$i" "des$((1 + RANDOM % $m_des))12345" designers  des_staff 
+done
+
+
