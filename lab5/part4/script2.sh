@@ -1,0 +1,1 @@
+00 12 1 * * /root/os/lab5/part3/backup_diff.sh 
